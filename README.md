@@ -4,8 +4,11 @@ This repository provides a streamlined solution for deploying a fully functional
 
 ### Features:
 🚀 **Easy Deployment**: With the included Docker Compose file, you can effortlessly set up a local development environment or deploy your WordPress site to a production server.
+
 🛡️ **Isolated Environment**: Docker containers ensure that your WordPress installation, database, and other services are isolated from your host system, minimising conflicts and maintaining consistency.
+
 🔐 **Secure Configuration**: The Docker Compose configuration in this repository follows best practices for security, keeping your WordPress site and data safe.
+
 🌐 **Scalable**: Seamlessly scale your WordPress setup by adjusting the container configurations in the Docker Compose file to meet your project's growing needs.
 
 ### Containers:
