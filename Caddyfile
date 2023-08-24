@@ -1,4 +1,4 @@
-<your_domain> {
+localhost {
   root * /var/www/html
   file_server
   encode zstd gzip
