@@ -28,6 +28,8 @@ services:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_CONFIG_EXTRA: |	
+        define('WP_REDIS_HOST', 'redis');
     networks:
       - wpsite
  
@@ -61,7 +63,7 @@ services:
     networks:
       - wpsite
       
-  # redis - cache for Wordpress... make sure to add: define('WP_REDIS_HOST', 'redis'); to the wp_config.
+  # redis - cache for Wordpress
   redis:
     image: 'redis:alpine'
     container_name: redis
