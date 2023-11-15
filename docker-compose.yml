@@ -14,14 +14,16 @@ services:
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
     networks:
-      - wpsite
+      - backend
   
   # Wordpress - FPM-Alpinem default port 9000
   wordpress:
+    build:
+      context: .
+      dockerfile: Dockerfile
     depends_on:
       - db
     container_name: wordpress
-    image: wordpress:fpm-alpine
     restart: always
     volumes: ["./www/:/var/www/html","./upload.ini:/usr/local/etc/php/conf.d/uploads.ini"]
     environment:
@@ -31,7 +33,8 @@ services:
       WORDPRESS_CONFIG_EXTRA: |	
         define('WP_REDIS_HOST', 'redis');
     networks:
-      - wpsite
+      - frontend
+      - backend
  
   # Caddy Web Server      
   caddy:
@@ -45,7 +48,7 @@ services:
       - ./caddy_data:/data
       - ./Caddyfile:/etc/caddy/Caddyfile
     networks:
-      - wpsite
+      - frontend
       
   # phpmyadmin - allows simple db migration, runs on port 8788
   phpmyadmin:
@@ -61,7 +64,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
       UPLOAD_LIMIT: 512M
     networks:
-      - wpsite
+      - frontend
       
   # redis - cache for Wordpress
   redis:
@@ -75,10 +78,12 @@ services:
     expose:
       - '6379'
     networks:
-      - wpsite
+      - frontend
   
 networks:
-  wpsite:
+  frontend:
+  backend:
+    internal: true
 volumes:
   db_data:
   www:

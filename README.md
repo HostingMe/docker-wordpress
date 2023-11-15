@@ -22,7 +22,7 @@ phpmyadmin
 1. Clone this repository to your local machine.
 2. Install Docker and Docker Compose if you haven't already.
 3. Configure the Docker Compose environment variables to match your project requirements.
-4. Run `docker-compose up -d` to start the WordPress site and associated services.
+4. Run `docker compose up --build -d` to start the WordPress site and associated services.
 5. Access your WordPress site by navigating to http://localhost in your browser.
 
 ### Setting up Redis Cache
