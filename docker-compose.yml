@@ -1,6 +1,6 @@
 version: '3'
 services:
-  
+
   # Database - MariaDB has been chosen, runs on default port
   db:
     container_name: database
@@ -15,8 +15,8 @@ services:
       MYSQL_PASSWORD: wordpress
     networks:
       - backend
-  
-  # Wordpress - FPM-Alpinem default port 9000
+
+  # Wordpress - FPM-Alpine default port 9000
   wordpress:
     build:
       context: .
@@ -30,13 +30,13 @@ services:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_CONFIG_EXTRA: |	
+      WORDPRESS_CONFIG_EXTRA: |
         define('WP_REDIS_HOST', 'redis');
     networks:
       - frontend
       - backend
- 
-  # Caddy Web Server      
+
+  # Caddy Web Server
   caddy:
     image: caddy
     container_name: caddy
@@ -49,7 +49,7 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
     networks:
       - frontend
-      
+
   # phpmyadmin - allows simple db migration, runs on port 8788
   phpmyadmin:
     depends_on:
@@ -65,7 +65,8 @@ services:
       UPLOAD_LIMIT: 512M
     networks:
       - frontend
-      
+      - backend
+
   # redis - cache for Wordpress
   redis:
     image: 'redis:alpine'
@@ -79,7 +80,7 @@ services:
       - '6379'
     networks:
       - frontend
-  
+
 networks:
   frontend:
   backend:
